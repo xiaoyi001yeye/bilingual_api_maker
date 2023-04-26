@@ -1,0 +1,25 @@
+
+sequenceDiagram
+    actor User
+    participant BAM_API as bilingual_api_maker
+    participant ChatGPT
+    participant GitHub
+    rect rgb(255, 255, 0)
+    User->>BAM_API: 填写github项目地址
+    end 
+    User->>+BAM_API: 点击按钮开始翻译
+    BAM_API->BAM_API: 自动识别哪些文件要进行翻译
+    rect rgb(255, 140, 0)
+
+    BAM_API->>+ChatGPT: 调用翻译API
+    ChatGPT->>-BAM_API: 返回翻译结果
+
+    end
+    BAM_API->BAM_API: 识别翻译是否结束
+    BAM_API->>-User: 翻译结束
+    rect rgb(255, 140, 140)
+
+    BAM_API->>+GitHub: 提交Pull Request
+    GitHub->>-BAM_API: 返回Pull Request URL
+
+    end
